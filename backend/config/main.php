@@ -10,8 +10,10 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
-    'modules' => [],
+    'bootstrap' => ['gii'],
+    'modules' => [
+        'gii' => 'yii\gii\Module',
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
