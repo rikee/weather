@@ -34,8 +34,11 @@ AppAsset::register($this);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Users', 'url' => ['/user/index']],
+                ['label' => 'Current Contests', 'url' => ['/contest-current/index']],
                 ['label' => 'Contest Types', 'url' => ['/contest-type/index']],
                 ['label' => 'Structures', 'url' => ['/structure/index']],
+                ['label' => 'Locations', 'url' => ['/location/index']],
+                ['label' => 'Regions', 'url' => ['/region/index']],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

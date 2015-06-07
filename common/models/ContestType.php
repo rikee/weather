@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%contest_types}}".
+ * This is the model class for table "{{%contest_type}}".
  *
  * @property integer $id
  * @property string $title
@@ -15,7 +15,8 @@ use Yii;
  * @property integer $max_players
  * @property integer $structure_id
  *
- * @property Structures $structure
+ * @property ContestCurrent[] $contestCurrents
+ * @property Structure $structure
  */
 class ContestType extends \yii\db\ActiveRecord
 {
@@ -24,7 +25,7 @@ class ContestType extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%contest_types}}';
+        return '{{%contest_type}}';
     }
 
     /**
@@ -59,8 +60,16 @@ class ContestType extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getContestCurrents()
+    {
+        return $this->hasMany(ContestCurrent::className(), ['type_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getStructure()
     {
-        return $this->hasOne(Structures::className(), ['id' => 'structure_id']);
+        return $this->hasOne(Structure::className(), ['id' => 'structure_id']);
     }
 }

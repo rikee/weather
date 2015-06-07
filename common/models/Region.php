@@ -5,22 +5,22 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%structure}}".
+ * This is the model class for table "{{%region}}".
  *
  * @property integer $id
  * @property string $title
- * @property string $structure
  *
- * @property ContestType[] $contestTypes
+ * @property ContestCurrent[] $contestCurrents
+ * @property Location[] $locations
  */
-class Structure extends \yii\db\ActiveRecord
+class Region extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%structure}}';
+        return '{{%region}}';
     }
 
     /**
@@ -29,8 +29,7 @@ class Structure extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'structure'], 'required'],
-            [['structure'], 'string'],
+            [['title'], 'required'],
             [['title'], 'string', 'max' => 255]
         ];
     }
@@ -43,15 +42,22 @@ class Structure extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'structure' => 'Structure',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getContestTypes()
+    public function getContestCurrents()
     {
-        return $this->hasMany(ContestType::className(), ['structure_id' => 'id']);
+        return $this->hasMany(ContestCurrent::className(), ['region_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocations()
+    {
+        return $this->hasMany(Location::className(), ['region_id' => 'id']);
     }
 }
