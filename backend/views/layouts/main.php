@@ -33,7 +33,7 @@ AppAsset::register($this);
             ]);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Users', 'url' => ['/users/index']],
+                ['label' => 'Users', 'url' => ['/user/index']],
                 ['label' => 'Contest Types', 'url' => ['/contest-type/index']],
                 ['label' => 'Structures', 'url' => ['/structure/index']],
             ];
