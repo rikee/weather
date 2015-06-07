@@ -20,6 +20,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property integer $role
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -123,6 +124,38 @@ class User extends ActiveRecord implements IdentityInterface
     public function getId()
     {
         return $this->getPrimaryKey();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRoleString()
+    {
+        switch ($this->role)
+        {
+            case '10':
+                return 'Thor';
+            case '1':
+                return 'Registered';
+            default:
+                return 'Registered';
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getStatusString()
+    {
+        switch ($this->status)
+        {
+            case '10':
+                return 'Active';
+            case '0':
+                return 'Deleted';
+            default:
+                return 'Unknown';
+        }
     }
 
     /**
