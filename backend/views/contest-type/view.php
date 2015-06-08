@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'min_players',
             'max_players',
             'structure_id',
+            'status',
         ],
     ]) ?>
 

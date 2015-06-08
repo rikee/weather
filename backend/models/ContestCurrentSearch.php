@@ -18,7 +18,7 @@ class ContestCurrentSearch extends ContestCurrent
     public function rules()
     {
         return [
-            [['id', 'type_id', 'category', 'region_id'], 'integer'],
+            [['id', 'type_id', 'category', 'region_id', 'status'], 'integer'],
             [['title'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class ContestCurrentSearch extends ContestCurrent
             'type_id' => $this->type_id,
             'category' => $this->category,
             'region_id' => $this->region_id,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);

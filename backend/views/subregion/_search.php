@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\RegionSearch */
+/* @var $model backend\models\SubregionSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="region-search">
+<div class="subregion-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,7 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'parent_region_id') ?>
+    <?= $form->field($model, 'short_title') ?>
+
+    <?= $form->field($model, 'region_id') ?>
 
     <?= $form->field($model, 'status') ?>
 

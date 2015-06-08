@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'lat',
             'lon',
-            'region_id',
+            'subregion_id',
+            // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

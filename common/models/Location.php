@@ -11,9 +11,10 @@ use Yii;
  * @property string $title
  * @property double $lat
  * @property double $lon
- * @property integer $region_id
+ * @property integer $subregion_id
+ * @property integer $status
  *
- * @property Region $region
+ * @property Subregion $subregion
  */
 class Location extends \yii\db\ActiveRecord
 {
@@ -31,9 +32,9 @@ class Location extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'lat', 'lon', 'region_id'], 'required'],
+            [['title', 'lat', 'lon', 'subregion_id'], 'required'],
             [['lat', 'lon'], 'number'],
-            [['region_id'], 'integer'],
+            [['subregion_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
     }
@@ -48,15 +49,16 @@ class Location extends \yii\db\ActiveRecord
             'title' => 'Title',
             'lat' => 'Lat',
             'lon' => 'Lon',
-            'region_id' => 'Region ID',
+            'subregion_id' => 'Subregion ID',
+            'status' => 'Status',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRegion()
+    public function getSubregion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+        return $this->hasOne(Subregion::className(), ['id' => 'subregion_id']);
     }
 }

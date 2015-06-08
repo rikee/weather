@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Region */
+/* @var $model common\models\Subregion */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Subregions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="region-view">
+<div class="subregion-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'parent_region_id',
+            'short_title',
+            'region_id',
             'status',
         ],
     ]) ?>

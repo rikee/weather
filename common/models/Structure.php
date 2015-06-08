@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $title
  * @property string $structure
+ * @property integer $status
  *
  * @property ContestType[] $contestTypes
  */
@@ -31,6 +32,7 @@ class Structure extends \yii\db\ActiveRecord
         return [
             [['title', 'structure'], 'required'],
             [['structure'], 'string'],
+            [['status'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
     }
@@ -44,6 +46,7 @@ class Structure extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'structure' => 'Structure',
+            'status' => 'Status',
         ];
     }
 

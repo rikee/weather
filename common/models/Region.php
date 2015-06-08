@@ -9,9 +9,11 @@ use Yii;
  *
  * @property integer $id
  * @property string $title
+ * @property integer $parent_region_id
+ * @property integer $status
  *
  * @property ContestCurrent[] $contestCurrents
- * @property Location[] $locations
+ * @property Subregion[] $subregions
  */
 class Region extends \yii\db\ActiveRecord
 {
@@ -30,6 +32,7 @@ class Region extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
+            [['parent_region_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
     }
@@ -42,6 +45,8 @@ class Region extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'parent_region_id' => 'Parent Region ID',
+            'status' => 'Status',
         ];
     }
 
@@ -56,8 +61,8 @@ class Region extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLocations()
+    public function getSubregions()
     {
-        return $this->hasMany(Location::className(), ['region_id' => 'id']);
+        return $this->hasMany(Subregion::className(), ['region_id' => 'id']);
     }
 }

@@ -18,7 +18,7 @@ class ContestTypeSearch extends ContestType
     public function rules()
     {
         return [
-            [['id', 'min_players', 'max_players', 'structure_id'], 'integer'],
+            [['id', 'min_players', 'max_players', 'structure_id', 'status'], 'integer'],
             [['title'], 'safe'],
             [['entry_fee', 'withheld'], 'number'],
         ];
@@ -63,6 +63,7 @@ class ContestTypeSearch extends ContestType
             'min_players' => $this->min_players,
             'max_players' => $this->max_players,
             'structure_id' => $this->structure_id,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);

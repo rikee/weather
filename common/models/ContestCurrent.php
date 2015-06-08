@@ -12,6 +12,7 @@ use Yii;
  * @property integer $type_id
  * @property integer $category
  * @property integer $region_id
+ * @property integer $status
  *
  * @property Region $region
  * @property ContestType $type
@@ -33,7 +34,7 @@ class ContestCurrent extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'type_id', 'category', 'region_id'], 'required'],
-            [['type_id', 'category', 'region_id'], 'integer'],
+            [['type_id', 'category', 'region_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
     }
@@ -49,6 +50,7 @@ class ContestCurrent extends \yii\db\ActiveRecord
             'type_id' => 'Type ID',
             'category' => 'Category',
             'region_id' => 'Region ID',
+            'status' => 'Status',
         ];
     }
 

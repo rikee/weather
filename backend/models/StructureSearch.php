@@ -18,7 +18,7 @@ class StructureSearch extends Structure
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['title', 'structure'], 'safe'],
         ];
     }
@@ -57,6 +57,7 @@ class StructureSearch extends Structure
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

@@ -38,6 +38,7 @@ AppAsset::register($this);
                 ['label' => 'Contest Types', 'url' => ['/contest-type/index']],
                 ['label' => 'Structures', 'url' => ['/structure/index']],
                 ['label' => 'Locations', 'url' => ['/location/index']],
+                ['label' => 'Subregions', 'url' => ['/subregion/index']],
                 ['label' => 'Regions', 'url' => ['/region/index']],
             ];
             if (Yii::$app->user->isGuest) {

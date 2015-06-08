@@ -14,6 +14,7 @@ use Yii;
  * @property integer $min_players
  * @property integer $max_players
  * @property integer $structure_id
+ * @property integer $status
  *
  * @property ContestCurrent[] $contestCurrents
  * @property Structure $structure
@@ -36,7 +37,7 @@ class ContestType extends \yii\db\ActiveRecord
         return [
             [['title', 'entry_fee', 'withheld', 'min_players', 'max_players', 'structure_id'], 'required'],
             [['entry_fee', 'withheld'], 'number'],
-            [['min_players', 'max_players', 'structure_id'], 'integer'],
+            [['min_players', 'max_players', 'structure_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255]
         ];
     }
@@ -54,6 +55,7 @@ class ContestType extends \yii\db\ActiveRecord
             'min_players' => 'Min Players',
             'max_players' => 'Max Players',
             'structure_id' => 'Structure ID',
+            'status' => 'Status',
         ];
     }
 

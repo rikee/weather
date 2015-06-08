@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Location;
+use common\models\Subregion;
 
 /**
- * LocationSearch represents the model behind the search form about `common\models\Location`.
+ * SubregionSearch represents the model behind the search form about `common\models\Subregion`.
  */
-class LocationSearch extends Location
+class SubregionSearch extends Subregion
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class LocationSearch extends Location
     public function rules()
     {
         return [
-            [['id', 'subregion_id', 'status'], 'integer'],
-            [['title'], 'safe'],
-            [['lat', 'lon'], 'number'],
+            [['id', 'status'], 'integer'],
+            [['title', 'short_title'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class LocationSearch extends Location
      */
     public function search($params)
     {
-        $query = Location::find();
+        $query = Subregion::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,13 +57,12 @@ class LocationSearch extends Location
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'lat' => $this->lat,
-            'lon' => $this->lon,
-            'subregion_id' => $this->subregion_id,
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'short_title', $this->short_title])
+            ->andFilterWhere(['like', 'region.title', $this->short_title]);
 
         return $dataProvider;
     }
