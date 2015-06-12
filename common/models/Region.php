@@ -65,4 +65,16 @@ class Region extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Subregion::className(), ['region_id' => 'id']);
     }
+
+    public function getStatusString() {
+        switch($this->status)
+        {
+            case '10':
+                return 'active';
+            case '0':
+                return 'disabled';
+            default:
+                return 'error';
+        }
+    }
 }

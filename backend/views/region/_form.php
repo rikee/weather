@@ -16,7 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'parent_region_id')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([
+        '10' => 'active',
+        '0' => 'disabled'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
