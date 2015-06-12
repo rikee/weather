@@ -18,7 +18,7 @@ class SubregionSearch extends Subregion
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
+            [['id', 'region_id', 'status'], 'integer'],
             [['title', 'short_title'], 'safe'],
         ];
     }
@@ -57,12 +57,12 @@ class SubregionSearch extends Subregion
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'region_id' => $this->region_id,
             'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'short_title', $this->short_title])
-            ->andFilterWhere(['like', 'region.title', $this->short_title]);
+            ->andFilterWhere(['like', 'short_title', $this->short_title]);
 
         return $dataProvider;
     }

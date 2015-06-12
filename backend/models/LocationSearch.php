@@ -64,8 +64,7 @@ class LocationSearch extends Location
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-              ->andFilterWhere(['like', 'subregion.title', $this->title]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }
