@@ -51,6 +51,7 @@ class Location extends \yii\db\ActiveRecord
             'lon' => 'Lon',
             'subregion_id' => 'Subregion ID',
             'status' => 'Status',
+            'subregionTitle' => Yii::t('app', 'Subregion Title'),
         ];
     }
 
@@ -60,5 +61,17 @@ class Location extends \yii\db\ActiveRecord
     public function getSubregion()
     {
         return $this->hasOne(Subregion::className(), ['id' => 'subregion_id']);
+    }
+
+    public function getStatusString() {
+        switch($this->status)
+        {
+            case '10':
+                return 'active';
+            case '0':
+                return 'disabled';
+            default:
+                return 'error';
+        }
     }
 }

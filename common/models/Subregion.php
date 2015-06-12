@@ -51,7 +51,7 @@ class Subregion extends \yii\db\ActiveRecord
             'short_title' => 'Short Title',
             'region_id' => 'Region ID',
             'status' => 'Status',
-            'regionTitle' => Yii::t('app', 'Region Title')
+            'regionTitle' => Yii::t('app', 'Region Title'),
         ];
     }
 

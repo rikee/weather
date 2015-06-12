@@ -29,8 +29,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'lat',
             'lon',
-            'subregion_id',
-            // 'status',
+            [
+                'attribute' => 'Subregion',
+                'value' => 'subregion.short_title',
+                'filter' => Html::activeDropDownList($searchModel, 'subregion_id',\yii\helpers\ArrayHelper::map(\common\models\Subregion::find()->all(), 'id', 'short_title'),['class'=>'form-control', 'prompt' => 'Select Subegion']),
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->statusString;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status',
+                    [
+                        '10' => 'active',
+                        '0' => 'disabled'
+                    ]
+                    ,['class'=>'form-control', 'prompt' => 'Select Status']),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
