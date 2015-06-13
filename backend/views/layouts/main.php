@@ -25,7 +25,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Weather Admin',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -34,12 +34,22 @@ AppAsset::register($this);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Users', 'url' => ['/user/index']],
-                ['label' => 'Current Contests', 'url' => ['/contest-current/index']],
-                ['label' => 'Contest Types', 'url' => ['/contest-type/index']],
-                ['label' => 'Structures', 'url' => ['/structure/index']],
-                ['label' => 'Locations', 'url' => ['/location/index']],
-                ['label' => 'Subregions', 'url' => ['/subregion/index']],
-                ['label' => 'Regions', 'url' => ['/region/index']],
+                [
+                    'label' => 'Contests',
+                    'items' => [
+                        ['label' => 'Current Contests', 'url' => ['/contest-current/index']],
+                        ['label' => 'Contest Types', 'url' => ['/contest-type/index']],
+                        ['label' => 'Structures', 'url' => ['/structure/index']],
+                    ],
+                ],
+                [
+                    'label' => 'Locations',
+                    'items' => [
+                        ['label' => 'Locations', 'url' => ['/location/index']],
+                        ['label' => 'Subregions', 'url' => ['/subregion/index']],
+                        ['label' => 'Regions', 'url' => ['/region/index']],
+                    ],
+                ],
             ];
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
