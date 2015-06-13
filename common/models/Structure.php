@@ -16,6 +16,9 @@ use Yii;
  */
 class Structure extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+
     /**
      * @inheritdoc
      */
@@ -33,7 +36,8 @@ class Structure extends \yii\db\ActiveRecord
             [['title', 'structure'], 'required'],
             [['structure'], 'string'],
             [['status'], 'integer'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 

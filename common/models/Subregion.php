@@ -19,6 +19,9 @@ use Yii;
  */
 class Subregion extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+
     /**
      * @inheritdoc
      */
@@ -36,7 +39,8 @@ class Subregion extends \yii\db\ActiveRecord
             [['title', 'region_id'], 'required'],
             [['region_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['short_title'], 'string', 'max' => 8]
+            [['short_title'], 'string', 'max' => 8],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 

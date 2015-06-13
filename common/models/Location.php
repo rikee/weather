@@ -18,6 +18,9 @@ use Yii;
  */
 class Location extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+
     /**
      * @inheritdoc
      */
@@ -35,7 +38,8 @@ class Location extends \yii\db\ActiveRecord
             [['title', 'lat', 'lon', 'subregion_id'], 'required'],
             [['lat', 'lon'], 'number'],
             [['subregion_id', 'status'], 'integer'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 

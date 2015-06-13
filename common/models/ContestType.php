@@ -21,6 +21,9 @@ use Yii;
  */
 class ContestType extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+
     /**
      * @inheritdoc
      */
@@ -38,7 +41,8 @@ class ContestType extends \yii\db\ActiveRecord
             [['title', 'entry_fee', 'withheld', 'min_players', 'max_players', 'structure_id'], 'required'],
             [['entry_fee', 'withheld'], 'number'],
             [['min_players', 'max_players', 'structure_id', 'status'], 'integer'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 

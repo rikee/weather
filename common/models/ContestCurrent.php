@@ -19,6 +19,9 @@ use Yii;
  */
 class ContestCurrent extends \yii\db\ActiveRecord
 {
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 10;
+
     /**
      * @inheritdoc
      */
@@ -35,7 +38,8 @@ class ContestCurrent extends \yii\db\ActiveRecord
         return [
             [['title', 'type_id', 'category', 'region_id'], 'required'],
             [['type_id', 'category', 'region_id', 'status'], 'integer'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
 
