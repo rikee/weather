@@ -30,9 +30,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'entry_fee',
             'withheld',
             'min_players',
-            // 'max_players',
-            // 'structure_id',
-            // 'status',
+            'max_players',
+            [
+                'attribute' => 'Structure',
+                'value' => 'structure.title',
+                'filter' => Html::activeDropDownList($searchModel, 'structure_id',\yii\helpers\ArrayHelper::map(\common\models\Structure::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Structure']),
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->statusString;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status',
+                    [
+                        '10' => 'active',
+                        '0' => 'disabled'
+                    ]
+                    ,['class'=>'form-control', 'prompt' => 'Select Status']),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

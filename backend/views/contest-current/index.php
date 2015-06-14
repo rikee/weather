@@ -27,10 +27,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'type_id',
+            [
+                'attribute' => 'Type',
+                'value' => 'contestType.title',
+                'filter' => Html::activeDropDownList($searchModel, 'type_id',\yii\helpers\ArrayHelper::map(\common\models\ContestType::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Type']),
+            ],
             'category',
-            'region_id',
-            // 'status',
+            [
+                'attribute' => 'Region',
+                'value' => 'region.title',
+                'filter' => Html::activeDropDownList($searchModel, 'region_id',\yii\helpers\ArrayHelper::map(\common\models\Region::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Region']),
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->statusString;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status',
+                    [
+                        '10' => 'active',
+                        '0' => 'disabled'
+                    ]
+                    ,['class'=>'form-control', 'prompt' => 'Select Status']),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

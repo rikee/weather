@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\ContestType;
+use common\models\Region;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ContestCurrent */
@@ -14,11 +17,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type_id')->textInput() ?>
+    <?= $form->field($model, 'type_id')->dropDownList(
+        ArrayHelper::map(ContestType::find()->all(), 'id', 'title')
+    ) ?>
 
     <?= $form->field($model, 'category')->textInput() ?>
 
-    <?= $form->field($model, 'region_id')->textInput() ?>
+    <?= $form->field($model, 'region_id')->dropDownList(
+        ArrayHelper::map(Region::find()->all(), 'id', 'title')
+    ) ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 

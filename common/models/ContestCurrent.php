@@ -73,4 +73,16 @@ class ContestCurrent extends \yii\db\ActiveRecord
     {
         return $this->hasOne(ContestType::className(), ['id' => 'type_id']);
     }
+
+    public function getStatusString() {
+        switch($this->status)
+        {
+            case '10':
+                return 'active';
+            case '0':
+                return 'disabled';
+            default:
+                return 'error';
+        }
+    }
 }

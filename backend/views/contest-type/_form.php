@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Structure;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ContestType */
@@ -22,9 +24,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'max_players')->textInput() ?>
 
-    <?= $form->field($model, 'structure_id')->textInput() ?>
+    <?= $form->field($model, 'structure_id')->dropDownList(
+        ArrayHelper::map(Structure::find()->all(), 'id', 'title')
+    ) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([
+        '10' => 'active',
+        '0' => 'disabled'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -28,7 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'structure:ntext',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->statusString;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status',
+                    [
+                        '10' => 'active',
+                        '0' => 'disabled'
+                    ]
+                    ,['class'=>'form-control', 'prompt' => 'Select Status']),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

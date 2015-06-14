@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use Yii;
@@ -8,21 +9,21 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "{{%user}}".
  *
  * @property integer $id
  * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
  * @property string $email
- * @property string $auth_key
- * @property integer $status
+ * @property integer $role
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $password_reset_token
+ * @property string $password_hash
+ * @property string $auth_key
+ * @property integer $status
+ * @property string $balance
+ * @property string $balance_bonus
  * @property string $password write-only password
- * @property integer $role
- * @property double $balance
- * @property double $balance_bonus
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -55,7 +56,32 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['username', 'email', 'created_at', 'updated_at', 'password_hash', 'auth_key'], 'required'],
+            [['role', 'created_at', 'updated_at', 'status'], 'integer'],
             [['balance', 'balance_bonus'], 'number'],
+            [['username', 'email', 'password_reset_token', 'password_hash'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'email' => 'Email',
+            'role' => 'Role',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'password_reset_token' => 'Password Reset Token',
+            'password_hash' => 'Password Hash',
+            'auth_key' => 'Auth Key',
+            'status' => 'Status',
+            'balance' => 'Balance',
+            'balance_bonus' => 'Balance Bonus',
         ];
     }
 

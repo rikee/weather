@@ -78,4 +78,16 @@ class ContestType extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Structure::className(), ['id' => 'structure_id']);
     }
+
+    public function getStatusString() {
+        switch($this->status)
+        {
+            case '10':
+                return 'active';
+            case '0':
+                return 'disabled';
+            default:
+                return 'error';
+        }
+    }
 }
