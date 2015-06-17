@@ -18,7 +18,7 @@ class ContestCategorySearch extends ContestCategory
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['title'], 'safe'],
         ];
     }

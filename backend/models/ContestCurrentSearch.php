@@ -18,7 +18,7 @@ class ContestCurrentSearch extends ContestCurrent
     public function rules()
     {
         return [
-            [['id', 'type_id', 'category', 'region_id', 'status'], 'integer'],
+            [['id', 'type_id', 'category_id', 'region_id', 'status'], 'integer'],
             [['title'], 'safe'],
         ];
     }
