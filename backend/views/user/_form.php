@@ -16,15 +16,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'role')->textInput() ?>
+    <?= $form->field($model, 'role')->dropDownList([
+        $model::ROLE_SUPERADMIN => 'Superadmin',
+        $model::ROLE_REGISTERED => 'Registered'
+    ]) ?>
 
     <?= $form->field($model, 'balance')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'balance_bonus')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-        '10' => 'active',
-        '0' => 'disabled'
+        $model::STATUS_ACTIVE => 'Active',
+        $model::STATUS_DISABLED => 'Disabled',
+        $model::STATUS_DELETED => 'Deleted',
     ]) ?>
 
     <div class="form-group">

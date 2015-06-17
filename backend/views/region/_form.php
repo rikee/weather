@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Region */
@@ -14,11 +15,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parent_region_id')->textInput() ?>
+    <?= $form->field($model, 'parent_region_id')->dropDownList(
+        ArrayHelper::map($model::find()->all(), 'id', 'title'), ['prompt' => 'Select Parent Region']
+    ) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-        '10' => 'active',
-        '0' => 'disabled'
+        $model::STATUS_ACTIVE => 'Active',
+        $model::STATUS_DISABLED => 'Disabled',
+        $model::STATUS_DELETED => 'Deleted',
     ]) ?>
 
     <div class="form-group">

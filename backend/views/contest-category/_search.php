@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ContestCurrentSearch */
+/* @var $model backend\models\ContestCategorySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="contest-current-search">
+<div class="contest-category-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -18,12 +18,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'type_id') ?>
-
-    <?= $form->field($model, 'category_id') ?>
-
-    <?= $form->field($model, 'region_id') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

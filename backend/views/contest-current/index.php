@@ -28,13 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             [
-                'attribute' => 'Type',
-                'value' => 'contestType.title',
+                'attribute' => 'type',
+                'value' => 'type.title',
                 'filter' => Html::activeDropDownList($searchModel, 'type_id',\yii\helpers\ArrayHelper::map(\common\models\ContestType::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Type']),
             ],
-            'category',
             [
-                'attribute' => 'Region',
+                'attribute' => 'category',
+                'value' => 'category.title',
+                'filter' => Html::activeDropDownList($searchModel, 'category_id',\yii\helpers\ArrayHelper::map(\common\models\ContestCategory::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Category']),
+            ],
+            [
+                'attribute' => 'region',
                 'value' => 'region.title',
                 'filter' => Html::activeDropDownList($searchModel, 'region_id',\yii\helpers\ArrayHelper::map(\common\models\Region::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Region']),
             ],
@@ -45,8 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Html::activeDropDownList($searchModel, 'status',
                     [
-                        '10' => 'active',
-                        '0' => 'disabled'
+                        $searchModel::STATUS_ACTIVE => 'Active',
+                        $searchModel::STATUS_DISABLED => 'Disabled',
+                        $searchModel::STATUS_DELETED => 'Deleted',
                     ]
                     ,['class'=>'form-control', 'prompt' => 'Select Status']),
             ],

@@ -18,10 +18,12 @@ use Yii;
  *
  * @property ContestCurrent[] $contestCurrents
  * @property Structure $structure
+ * @property string $statusString
  */
 class ContestType extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
+    const STATUS_DISABLED = 2;
     const STATUS_ACTIVE = 10;
 
     /**
@@ -42,6 +44,7 @@ class ContestType extends \yii\db\ActiveRecord
             [['entry_fee', 'withheld'], 'number'],
             [['min_players', 'max_players', 'structure_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
@@ -79,15 +82,21 @@ class ContestType extends \yii\db\ActiveRecord
         return $this->hasOne(Structure::className(), ['id' => 'structure_id']);
     }
 
-    public function getStatusString() {
-        switch($this->status)
+    /**
+     * @inheritdoc
+     */
+    public function getStatusString()
+    {
+        switch ($this->status)
         {
-            case '10':
-                return 'active';
-            case '0':
-                return 'disabled';
+            case $this::STATUS_ACTIVE:
+                return 'Active';
+            case $this::STATUS_DISABLED:
+                return 'Disabled';
+            case $this::STATUS_DELETED:
+                return 'Deleted';
             default:
-                return 'error';
+                return 'Error';
         }
     }
 }

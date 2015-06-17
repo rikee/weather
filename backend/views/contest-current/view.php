@@ -30,10 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'type_id',
-            'category',
-            'region_id',
-            'status',
+            [
+                'attribute' => 'type',
+                'value' => $model->type->title,
+            ],
+            [
+                'attribute' => 'category',
+                'value' => $model->category->title,
+            ],
+            [
+                'attribute' => 'region',
+                'value' => $model->region->title,
+            ],
+            [
+                'attribute' => 'status',
+                'value' => $model->statusString,
+            ],
         ],
     ]) ?>
 

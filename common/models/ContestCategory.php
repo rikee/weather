@@ -5,21 +5,16 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%contest_current}}".
+ * This is the model class for table "{{%contest_category}}".
  *
  * @property integer $id
  * @property string $title
- * @property integer $type_id
- * @property integer $category_id
- * @property integer $region_id
  * @property integer $status
  *
- * @property Region $region
- * @property ContestType $type
- * @property ContestCategory $category
+ * @property ContestCurrent[] $contestCurrents
  * @property string $statusString
  */
-class ContestCurrent extends \yii\db\ActiveRecord
+class ContestCategory extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_DISABLED = 2;
@@ -30,7 +25,7 @@ class ContestCurrent extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%contest_current}}';
+        return '{{%contest_category}}';
     }
 
     /**
@@ -39,9 +34,9 @@ class ContestCurrent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'type_id', 'category_id', 'region_id'], 'required'],
-            [['type_id', 'category_id', 'region_id', 'status'], 'integer'],
+            [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
+            [['status'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
@@ -55,9 +50,6 @@ class ContestCurrent extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'type_id' => 'Type ID',
-            'category_id' => 'Category ID',
-            'region_id' => 'Region ID',
             'status' => 'Status',
         ];
     }
@@ -65,25 +57,9 @@ class ContestCurrent extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRegion()
+    public function getContestCurrents()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getType()
-    {
-        return $this->hasOne(ContestType::className(), ['id' => 'type_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(ContestCategory::className(), ['id' => 'category_id']);
+        return $this->hasMany(ContestCurrent::className(), ['category_id' => 'id']);
     }
 
     /**

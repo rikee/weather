@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Regions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$parentRegionTitle = !is_null($model->parentRegion) ? $model->parentRegion->title : 'Root';
 ?>
 <div class="region-view">
 
@@ -30,8 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'parent_region_id',
-            'status',
+            [
+                'attribute' => 'parent region',
+                'value' => $parentRegionTitle,
+            ],
+            [
+                'attribute' => 'status',
+                'value' => $model->statusString,
+            ],
         ],
     ]) ?>
 

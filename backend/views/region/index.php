@@ -27,7 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'parent_region_id',
+            [
+                'attribute' => 'parent region',
+                'value' => function($model) {
+                    if (is_null($model->parentRegion))
+                    {
+                        return 'Root';
+                    }
+                    return $model->parentRegion->title;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'parent_region_id',\yii\helpers\ArrayHelper::map(\common\models\Region::find()->all(), 'id', 'title'),['class'=>'form-control', 'prompt' => 'Select Parent Region']),
+            ],
             [
                 'attribute' => 'status',
                 'value' => function($model) {
@@ -35,8 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Html::activeDropDownList($searchModel, 'status',
                     [
-                        '10' => 'active',
-                        '0' => 'disabled'
+                        $searchModel::STATUS_ACTIVE => 'Active',
+                        $searchModel::STATUS_DISABLED => 'Disabled',
+                        $searchModel::STATUS_DELETED => 'Deleted',
                     ]
                     ,['class'=>'form-control', 'prompt' => 'Select Status']),
             ],

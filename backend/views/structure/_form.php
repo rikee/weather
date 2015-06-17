@@ -17,8 +17,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'structure')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-        '10' => 'active',
-        '0' => 'disabled'
+        $model::STATUS_ACTIVE => 'Active',
+        $model::STATUS_DISABLED => 'Disabled',
+        $model::STATUS_DELETED => 'Deleted',
     ]) ?>
 
     <div class="form-group">

@@ -15,10 +15,12 @@ use Yii;
  * @property integer $status
  *
  * @property Subregion $subregion
+ * @property string $statusString
  */
 class Location extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
+    const STATUS_DISABLED = 2;
     const STATUS_ACTIVE = 10;
 
     /**
@@ -39,6 +41,7 @@ class Location extends \yii\db\ActiveRecord
             [['lat', 'lon'], 'number'],
             [['subregion_id', 'status'], 'integer'],
             [['title'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
@@ -67,15 +70,21 @@ class Location extends \yii\db\ActiveRecord
         return $this->hasOne(Subregion::className(), ['id' => 'subregion_id']);
     }
 
-    public function getStatusString() {
-        switch($this->status)
+    /**
+     * @inheritdoc
+     */
+    public function getStatusString()
+    {
+        switch ($this->status)
         {
-            case '10':
-                return 'active';
-            case '0':
-                return 'disabled';
+            case $this::STATUS_ACTIVE:
+                return 'Active';
+            case $this::STATUS_DISABLED:
+                return 'Disabled';
+            case $this::STATUS_DELETED:
+                return 'Deleted';
             default:
-                return 'error';
+                return 'Error';
         }
     }
 }

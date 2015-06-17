@@ -31,7 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'structure:ntext',
-            'status',
+            [
+                'attribute' => 'status',
+                'value' => $model->statusString,
+            ],
         ],
     ]) ?>
 

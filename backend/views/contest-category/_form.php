@@ -2,27 +2,17 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\Subregion;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Location */
+/* @var $model common\models\ContestCategory */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="location-form">
+<div class="contest-category-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'subregion_id')->dropDownList(
-        ArrayHelper::map(Subregion::find()->all(), 'id', 'short_title')
-    ) ?>
-
-    <?= $form->field($model, 'lat')->textInput() ?>
-
-    <?= $form->field($model, 'lon')->textInput() ?>
 
     <?= $form->field($model, 'status')->dropDownList([
         $model::STATUS_ACTIVE => 'Active',

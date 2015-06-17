@@ -15,12 +15,14 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $email
  * @property integer $role
+ * @property string $roleString
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password_reset_token
  * @property string $password_hash
  * @property string $auth_key
  * @property integer $status
+ * @property string $statusString
  * @property string $balance
  * @property string $balance_bonus
  * @property string $password write-only password
@@ -28,7 +30,10 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
+    const STATUS_DISABLED = 2;
     const STATUS_ACTIVE = 10;
+    const ROLE_REGISTERED = 1;
+    const ROLE_SUPERADMIN = 10;
 
     /**
      * @inheritdoc
@@ -56,6 +61,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['role', 'default', 'value' => self::ROLE_REGISTERED],
+            ['role', 'in', 'range' => [self::ROLE_REGISTERED, self::ROLE_SUPERADMIN]],
             [['username', 'email', 'created_at', 'updated_at', 'password_hash', 'auth_key'], 'required'],
             [['role', 'created_at', 'updated_at', 'status'], 'integer'],
             [['balance', 'balance_bonus'], 'number'],
@@ -162,12 +169,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         switch ($this->role)
         {
-            case '10':
-                return 'Thor';
-            case '1':
+            case $this::ROLE_SUPERADMIN:
+                return 'Superadmin';
+            case $this::ROLE_REGISTERED:
                 return 'Registered';
             default:
-                return 'Registered';
+                return 'Error';
         }
     }
 
@@ -178,12 +185,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         switch ($this->status)
         {
-            case '10':
+            case $this::STATUS_ACTIVE:
                 return 'Active';
-            case '0':
+            case $this::STATUS_DISABLED:
+                return 'Disabled';
+            case $this::STATUS_DELETED:
                 return 'Deleted';
             default:
-                return 'Unknown';
+                return 'Error';
         }
     }
 

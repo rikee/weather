@@ -38,6 +38,7 @@ AppAsset::register($this);
                     'label' => 'Contests',
                     'items' => [
                         ['label' => 'Current Contests', 'url' => ['/contest-current/index']],
+                        ['label' => 'Contest Categories', 'url' => ['/contest-category/index']],
                         ['label' => 'Contest Types', 'url' => ['/contest-type/index']],
                         ['label' => 'Structures', 'url' => ['/structure/index']],
                     ],

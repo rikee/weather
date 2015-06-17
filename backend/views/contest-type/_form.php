@@ -29,8 +29,9 @@ use common\models\Structure;
     ) ?>
 
     <?= $form->field($model, 'status')->dropDownList([
-        '10' => 'active',
-        '0' => 'disabled'
+        $model::STATUS_ACTIVE => 'Active',
+        $model::STATUS_DISABLED => 'Disabled',
+        $model::STATUS_DELETED => 'Deleted',
     ]) ?>
 
     <div class="form-group">

@@ -28,7 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'email',
-            'role',
+            [
+                'attribute' => 'role',
+                'value' => function($model) {
+                    return $model->roleString;
+                },
+                'filter' => Html::activeDropDownList($searchModel, 'status',
+                    [
+                        backend\models\UserSearch::ROLE_SUPERADMIN => 'Superadmin',
+                        backend\models\UserSearch::ROLE_REGISTERED => 'User'
+                    ]
+                    ,['class'=>'form-control', 'prompt' => 'Select Role']),
+            ],
             'created_at:date',
             // 'updated_at',
             // 'password_reset_token',
@@ -43,8 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Html::activeDropDownList($searchModel, 'status',
                     [
-                        '10' => 'active',
-                        '0' => 'disabled'
+                        backend\models\UserSearch::STATUS_ACTIVE => 'Active',
+                        backend\models\UserSearch::STATUS_DISABLED => 'Disabled',
+                        backend\models\UserSearch::STATUS_DELETED => 'Deleted',
                     ]
                     ,['class'=>'form-control', 'prompt' => 'Select Status']),
             ],

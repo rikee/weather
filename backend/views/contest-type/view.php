@@ -34,8 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'withheld',
             'min_players',
             'max_players',
-            'structure_id',
-            'status',
+            [
+                'attribute' => 'structure',
+                'value' => $model->structure->title,
+            ],
+            [
+                'attribute' => 'status',
+                'value' => $model->statusString,
+            ],
         ],
     ]) ?>
 
