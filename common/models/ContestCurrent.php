@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%contest_current}}".
@@ -19,7 +20,7 @@ use Yii;
  * @property ContestCategory $category
  * @property string $statusString
  */
-class ContestCurrent extends \yii\db\ActiveRecord
+class ContestCurrent extends ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_DISABLED = 2;

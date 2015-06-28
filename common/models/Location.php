@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use VertigoLabs\Overcast;
 
 /**
  * This is the model class for table "{{%location}}".
@@ -17,11 +19,17 @@ use Yii;
  * @property Subregion $subregion
  * @property string $statusString
  */
-class Location extends \yii\db\ActiveRecord
+class Location extends ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_DISABLED = 2;
     const STATUS_ACTIVE = 10;
+    const FORECAST_API_KEY = 'f9d7bea49e2a6a5375c78767674f0b67';
+
+    /**
+     * @var \VertigoLabs\Overcast\Overcast
+     */
+    protected $overcast;
 
     /**
      * @inheritdoc
@@ -86,5 +94,10 @@ class Location extends \yii\db\ActiveRecord
             default:
                 return 'Error';
         }
+    }
+
+    public function getPastDataSingle()
+    {
+        $this->overcast = new Overcast\Overcast('YOUR API KEY', new Overcast\ClientAdapters\FileGetContentsClientAdapter());
     }
 }

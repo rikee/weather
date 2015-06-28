@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%structure}}".
@@ -15,7 +16,7 @@ use Yii;
  * @property ContestType[] $contestTypes
  * @property string $statusString
  */
-class Structure extends \yii\db\ActiveRecord
+class Structure extends ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_DISABLED = 2;

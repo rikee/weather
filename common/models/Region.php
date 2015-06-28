@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%region}}".
@@ -17,7 +18,7 @@ use Yii;
  * @property Region $parentRegion
  * @property string $statusString
  */
-class Region extends \yii\db\ActiveRecord
+class Region extends ActiveRecord
 {
     const STATUS_DELETED = 0;
     const STATUS_DISABLED = 2;
