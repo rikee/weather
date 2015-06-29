@@ -4,7 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use VertigoLabs\Overcast;
+
+include '../helpers/forecast.io.php';
 
 /**
  * This is the model class for table "{{%location}}".
@@ -25,11 +26,6 @@ class Location extends ActiveRecord
     const STATUS_DISABLED = 2;
     const STATUS_ACTIVE = 10;
     const FORECAST_API_KEY = 'f9d7bea49e2a6a5375c78767674f0b67';
-
-    /**
-     * @var \VertigoLabs\Overcast\Overcast
-     */
-    protected $overcast;
 
     /**
      * @inheritdoc
@@ -98,6 +94,6 @@ class Location extends ActiveRecord
 
     public function getPastDataSingle()
     {
-        $this->overcast = new Overcast\Overcast('YOUR API KEY', new Overcast\ClientAdapters\FileGetContentsClientAdapter());
+
     }
 }

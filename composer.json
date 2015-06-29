@@ -18,7 +18,6 @@
         "yiisoft/yii2": ">=2.0.4",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "vertigolabs/overcast": "dev-master",
         "guzzle/guzzle": "~3.9"
     },
     "require-dev": {
