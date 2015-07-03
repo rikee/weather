@@ -4,8 +4,8 @@ namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-
-include '../helpers/forecast.io.php';
+include(Yii::getAlias('@common').'/helpers/forecast.io.php');
+use common\helpers\ForecastIO;
 
 /**
  * This is the model class for table "{{%location}}".
@@ -94,6 +94,12 @@ class Location extends ActiveRecord
 
     public function getPastDataSingle()
     {
-
+        $forecast = new ForecastIO(self::FORECAST_API_KEY, 'auto', 'en');
+        $condition = $forecast->getHistoricalConditions($this->lat, $this->lon, '2011-04-13T19:00:00-0700');
+        echo "precip intensity - " . $condition->getPrecipitationIntensity();
+        echo "<br>max precip intensity - " . $condition->getMaxPrecipitationIntensity();
+        echo "<br>pressure - " . $condition->getPressure();
+        echo "<br>max temperature - " . $condition->getMaxTemperature();
+        //echo "<pre>";var_dump($condition);die;
     }
 }

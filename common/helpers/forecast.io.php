@@ -1,5 +1,7 @@
 <?php
 
+namespace common\helpers;
+
 /**
  * Helper Class for forecast.io webservice
  */
@@ -431,6 +433,30 @@ class ForecastIOConditions
     {
 
         return $this->raw_data->precipProbability;
+
+    }
+
+    /**
+     * get precipitation intensity
+     *
+     * @return type
+     */
+    function getPrecipitationIntensity()
+    {
+
+        return $this->raw_data->precipIntensity;
+
+    }
+
+    /**
+     * get max precipitation intensity
+     *
+     * @return type
+     */
+    function getMaxPrecipitationIntensity()
+    {
+
+        return $this->raw_data->precipIntensityMax;
 
     }
 
