@@ -23,6 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <br/><br/>
+        <?= Html::a('Import Past Weather Data', ['import-past-data', 'id' => $model->id], [
+            'class' => 'btn btn-warning',
+            'data' => [
+                'confirm' => 'Are you sure you want to import? Importing will overwrite any previous history data for this location.',
+            ],
+        ]) ?>
     </p>
 
     <?= DetailView::widget([

@@ -118,4 +118,18 @@ class LocationController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * Imports past weather data to a location
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionImportPastData($id)
+    {
+        $model = $this->findModel($id);
+        $model->importPastData();
+
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
 }

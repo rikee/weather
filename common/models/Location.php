@@ -92,14 +92,48 @@ class Location extends ActiveRecord
         }
     }
 
-    public function getPastDataSingle()
+    /**
+     * @param $date -   string format yyyy-mm-ddThh:mm:ss-code');
+     *                  code - 4 digit time zone offset code (ie 0700)
+     * @return object - forecast historical object
+     */
+    public function getDateForecast($date)
     {
         $forecast = new ForecastIO(self::FORECAST_API_KEY, 'auto', 'en');
-        $condition = $forecast->getHistoricalConditions($this->lat, $this->lon, '2011-04-13T19:00:00-0700');
-        echo "precip intensity - " . $condition->getPrecipitationIntensity();
-        echo "<br>max precip intensity - " . $condition->getMaxPrecipitationIntensity();
-        echo "<br>pressure - " . $condition->getPressure();
-        echo "<br>max temperature - " . $condition->getMaxTemperature();
-        //echo "<pre>";var_dump($condition);die;
+        return $forecast->getHistoricalConditions($this->lat, $this->lon, $date);
+    }
+
+    /**
+     * imports all historical weather data since 01/01/2015
+     */
+    public function importPastData()
+    {
+        $attributes = ['location_id','date','temp_max','temp_min','precip_intensity_max','precip_type','wind_speed','humidity','pressure'];
+        $data = [];
+
+        $start_date = '2015-01-01';
+        $end_date = date('Y-m-d', strtotime("-1 day"));
+        while(strtotime($start_date) < strtotime($end_date))
+        {
+            $date = $start_date . 'T12:00:00-0700';
+
+            $dateForecast = $this->getDateForecast($date);
+            $data[] = [
+                $this->id,
+                $start_date,
+                round($dateForecast->getMaxTemperature(),0),
+                round($dateForecast->getMinTemperature(),0),
+                round($dateForecast->getMaxPrecipitationIntensity(),3),
+                $dateForecast->getPrecipitationType(),
+                round($dateForecast->getWindSpeed(),0),
+                round($dateForecast->getHumidity(),2),
+                round($dateForecast->getPressure(),0),
+            ];
+            $start_date = date('Y-m-d', strtotime("+1 day", strtotime($start_date)));
+        };
+
+        $pastDataTable = '{{%location_past_data}}';
+        Yii::$app->db->createCommand()->delete($pastDataTable, 'location_id = ' . $this->id)->execute();
+        Yii::$app->db->createCommand()->batchInsert($pastDataTable, $attributes, $data)->execute();
     }
 }
