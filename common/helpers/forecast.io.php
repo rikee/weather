@@ -420,7 +420,7 @@ class ForecastIOConditions
     function getPrecipitationType()
     {
 
-        $data = isset($this->raw_data->precipType) ? $this->raw_data->precipType : '';
+        $data = isset($this->raw_data->precipType) ? $this->raw_data->precipType : 'none';
         return $data;
 
     }
