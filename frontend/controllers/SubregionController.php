@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Location;
-use frontend\models\LocationSearch;
+use common\models\Subregion;
+use frontend\models\SubregionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LocationController implements the CRUD actions for Location model.
+ * SubregionController implements the CRUD actions for Subregion model.
  */
-class LocationController extends Controller
+class SubregionController extends Controller
 {
     public function behaviors()
     {
@@ -24,12 +24,12 @@ class LocationController extends Controller
     }
 
     /**
-     * Lists all Location models.
+     * Lists all Subregion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new LocationSearch();
+        $searchModel = new SubregionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -39,7 +39,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Displays a single Location model.
+     * Displays a single Subregion model.
      * @param integer $id
      * @return mixed
      */
@@ -51,15 +51,15 @@ class LocationController extends Controller
     }
 
     /**
-     * Finds the Location model based on its primary key value.
+     * Finds the Subregion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Location the loaded model
+     * @return Subregion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Location::findOne($id)) !== null) {
+        if (($model = Subregion::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
