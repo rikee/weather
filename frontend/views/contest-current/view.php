@@ -30,30 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            [
-                'attribute' => 'type',
-                'value' => $model->type->title,
-            ],
-            [
-                'attribute' => 'category',
-                'value' => $model->category->title,
-            ],
-            [
-                'attribute' => 'region',
-                'value' => $model->region->title,
-            ],
-            [
-                'attribute' => 'state',
-                'value' => $model->stateString,
-            ],
-            [
-                'attribute' => 'recurring',
-                'value' => $model->recurringString,
-            ],
-            [
-                'attribute' => 'status',
-                'value' => $model->statusString,
-            ],
+            'type_id',
+            'category_id',
+            'region_id',
+            'status',
         ],
     ]) ?>
 

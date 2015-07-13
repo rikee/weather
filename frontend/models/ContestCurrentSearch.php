@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
@@ -18,7 +18,7 @@ class ContestCurrentSearch extends ContestCurrent
     public function rules()
     {
         return [
-            [['id', 'type_id', 'category_id', 'region_id', 'state', 'recurring', 'status'], 'integer'],
+            [['id', 'type_id', 'category_id', 'region_id', 'status'], 'integer'],
             [['title'], 'safe'],
         ];
     }
@@ -58,10 +58,8 @@ class ContestCurrentSearch extends ContestCurrent
         $query->andFilterWhere([
             'id' => $this->id,
             'type_id' => $this->type_id,
-            'category' => $this->category,
+            'category_id' => $this->category_id,
             'region_id' => $this->region_id,
-            'state' => $this->state,
-            'recurring' => $this->recurring,
             'status' => $this->status,
         ]);
 

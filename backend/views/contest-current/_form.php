@@ -30,6 +30,21 @@ use common\models\Region;
         ArrayHelper::map(Region::find()->all(), 'id', 'title')
     ) ?>
 
+    <?= $form->field($model, 'state')->dropDownList([
+        $model::STATE_ANNOUNCED => 'Announced',
+        $model::STATE_REGISTERING => 'Registering',
+        $model::STATE_RUNNING => 'Running',
+        $model::STATE_CONCLUDED => 'Concluded',
+        $model::STATE_CANCELED => 'Canceled',
+    ]) ?>
+
+    <?= $form->field($model, 'recurring')->dropDownList([
+        $model::RECURRING_ONCE => 'Once',
+        $model::RECURRING_DAILY => 'Daily',
+        $model::RECURRING_WEEKLY => 'Weekly',
+        $model::RECURRING_MONTHLY => 'Monthly',
+    ]) ?>
+
     <?= $form->field($model, 'status')->dropDownList([
         $model::STATUS_ACTIVE => 'Active',
         $model::STATUS_DISABLED => 'Disabled',
