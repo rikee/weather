@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use yii\jui\DatePicker;
+use janisto\timepicker\TimePicker;
 use common\models\ContestCategory;
 use common\models\ContestType;
 use common\models\Region;
@@ -10,6 +12,17 @@ use common\models\Region;
 /* @var $this yii\web\View */
 /* @var $model common\models\ContestCurrent */
 /* @var $form yii\widgets\ActiveForm */
+?>
+
+<?php
+    $hours = array();
+    for ($i = 0; $i < 24; $i++) {
+        if ($i < 10) {
+            $hours[] = '0' . $i;
+        } else {
+            $hours[] = (string) $i;
+        }
+    }
 ?>
 
 <div class="contest-current-form">
@@ -43,6 +56,15 @@ use common\models\Region;
         $model::RECURRING_DAILY => 'Daily',
         $model::RECURRING_WEEKLY => 'Weekly',
         $model::RECURRING_MONTHLY => 'Monthly',
+    ]) ?>
+
+    <?= $form->field($model, 'date')->widget(TimePicker::className(), [
+        'mode' => 'datetime',
+        'clientOptions'=>[
+        'dateFormat' => 'yy-mm-dd',
+        'timeFormat' => 'HH:mm:ss',
+        'showSecond' => false,
+        ]
     ]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([

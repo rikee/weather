@@ -81,6 +81,13 @@ class ContestCurrentController extends Controller
     {
         $model = $this->findModel($id);
 
+        $submit_model = $model->load(Yii::$app->request->post());
+
+        if ($submit_model) {
+            $date = (Yii::$app->request->post('ContestCurrent')['date']);
+            $model->setAttribute('date', $date);
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

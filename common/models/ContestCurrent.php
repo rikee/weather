@@ -16,7 +16,7 @@ use yii\db\ActiveRecord;
  * @property integer $status
  * @property integer $state
  * @property integer $recurring
- * @property integer $time
+ * @property integer $date
  *
  * @property Region $region
  * @property ContestType $type
@@ -81,6 +81,7 @@ class ContestCurrent extends ActiveRecord
             'time' => 'Date',
             'recurring' => 'Frequency',
             'status' => 'Status',
+            'date' => 'Date',
         ];
     }
 

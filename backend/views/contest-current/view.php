@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'recurring',
                 'value' => $model->recurringString,
             ],
+            'date',
             [
                 'attribute' => 'status',
                 'value' => $model->statusString,
